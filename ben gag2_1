@@ -88,7 +88,7 @@ Holder=Color3.fromRGB(30,30,30),
 }
 },
 Icons={
-Error="rbxassetid://10709752996",
+Error="rbxassetid://89243556917765",
 Button="rbxassetid://892435569177657",
 Close="rbxassetid://89243556917765",
 TextBox="rbxassetid://89243556917765",
