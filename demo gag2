@@ -1,0 +1,145 @@
+local _0x1a2b = {108,111,99,97,108,32,103,101,97,114,76,105,115,116,32,61,32,123,34,67,111,109,109,111,110,32,87,97,116,101,114,105,110,103,32,67,97,110,34,44,32,34,67,111,109,109,111,110,32,83,112,114,105,110,107,108,101,114,34,44,32,34,83,105,103,110,34,44,32,34,85,110,99,111,109,109,111,110,32,83,112,114,105,110,107,108,101,114,34,44,32,34,84,114,111,119,101,108,34,44,32,34,82,97,114,101,32,83,112,114,105,110,107,108,101,114,34,44,32,34,74,117,109,112,32,77,117,115,104,114,111,111,109,34,44,32,34,83,112,101,101,100,32,77,117,115,104,114,111,111,109,34,44,32,34,76,97,110,116,101,114,110,34,44,32,34,83,104,114,105,110,107,32,77,117,115,104,114,111,111,109,34,44,32,34,83,117,112,101,114,115,105,122,101,32,77,117,115,104,114,111,111,109,34,44,32,34,70,108,97,115,104,98,97,110,103,34,44,32,34,71,110,111,109,101,34,44,32,34,66,97,115,105,99,32,80,111,116,34,44,32,34,76,101,103,101,110,100,97,114,121,32,83,112,114,105,110,107,108,101,114,34,44,32,34,73,110,118,105,115,105,98,105,108,105,116,121,32,77,117,115,104,114,111,111,109,34,44,32,34,84,101,108,101,112,111,114,116,101,114,34,44,32,34,87,104,101,101,108,98,97,114,114,111,119,34,44,32,34,83,117,112,101,114,32,87,97,116,101,114,105,110,103,32,67,97,110,34,44,32,34,83,117,112,101,114,32,83,112,114,105,110,107,108,101,114,34,44,32,34,80,108,97,121,101,114,32,77,97,103,110,101,116,34,125}
+local _0x3c4d = "" for _, _0x5e6f in ipairs(_0x1a2b) do _0x3c4d = _0x3c4d .. string.char(_0x5e6f) end
+
+local _0x99aa = {
+    _0x3c4d,
+    "Ladder Crate", "Bench Crate", "Light Crate", "Sign Crate", "Arch Crate", 
+    "Roleplay Crate", "Bridge Crate", "Spring Crate", "Seesaw Crate", 
+    "Conveyor Crate", "Owner Door Crate", "Bear Trap Crate", "Fence Crate", 
+    "Teleporter Pad Crate"
+}
+
+local _0x77bb = {
+    "All", "Carrot", "Tomato", "Apple", "Blueberry", "Strawberry", "Tulip",
+    "Banana", "Cactus", "Baby Cactus", "Corn", "Grape", "Mango", "Pineapple",
+    "Green Bean", "Coconut", "Acorn", "Cherry", "Dragon Fruit", "Glow Mushroom",
+    "Horned Melon", "Bamboo", "Poison Ivy", "Pomegranate", "Sunflower",
+    "Mushroom", "Poison Apple", "Venus Fly Trap", "Dragon's Breath",
+    "Ghost Pepper", "Moon Bloom", "Gold", "Rainbow", "Mega"
+}
+
+_G._lIll1 = false
+_G._lIll2 = false
+_G._lIll3 = false
+_G._lIll4 = false
+_G._lIll5 = false
+_G._lIll6 = false
+_G._lIll7 = false
+_G._lIll8 = false
+_G._lIll9 = false
+_G._lIll10 = false
+
+_G._s1 = 16
+_G._s2 = 50
+
+_G._t1 = false
+_G._t2 = "Carrot" 
+_G._t3 = 0.2
+
+_G._e1 = false
+_G._e2 = false
+_G._e3 = false
+
+_G._f1 = "All"
+_G._f2 = "All"
+_G._f3 = "Carrot"
+_G._f4 = "Carrot"
+_G._f5 = "Common Watering Can"
+_G._f6 = "Ladder Crate"
+_G._f7 = "Random Plot"
+_G._f8 = 0
+
+local _0xPls = game:GetService("Players")
+local _0xLP = _0xPls.LocalPlayer
+if not _0xLP then
+    repeat task.wait() _0xLP = _0xPls.LocalPlayer until _0xLP
+end
+
+local _0xRS = game:GetService("ReplicatedStorage")
+local _0xCS = game:GetService("CollectionService")
+local _0xTS = game:GetService("TweenService")
+local _0xRun = game:GetService("RunService")
+local _0xCG = game:GetService("CoreGui")
+
+local _0xNet = require(_0xRS:WaitForChild("SharedModules"):WaitForChild("Networking"))
+local _0xPck = require(_0xRS:WaitForChild("SharedModules"):WaitForChild("Packet"))
+
+local _0xHide = _0xLP:FindFirstChild("HideCollectProximityPrompts")
+if _0xHide then _0xHide.Value = false end
+
+task.spawn(function()
+    while true do
+        pcall(function()
+            local _0xChar = _0xLP.Character
+            if _0xChar then
+                local _0xHum = _0xChar:FindFirstChildOfClass("Humanoid")
+                if _0xHum then
+                    if not _0xHum.UseJumpPower then _0xHum.UseJumpPower = true end
+                    if _0xHum.WalkSpeed ~= _G._s1 then _0xHum.WalkSpeed = _G._s1 end
+                    if _0xHum.JumpPower ~= _G._s2 then _0xHum.JumpPower = _G._s2 end
+                end
+            end
+        end)
+        task.wait(0.1)
+    end
+end)
+
+local _0xSpd = 350
+local function _0xTw(_0xPos)
+    local _0xChar = _0xLP.Character
+    if not _0xChar then return end
+    local _0xHrp = _0xChar:FindFirstChild("HumanoidRootPart")
+    if not _0xHrp then return end
+
+    local _0xP = Instance.new("Part")
+    _0xP.Name = "chu_rblx_anchor"
+    _0xP.Size = Vector3.new(0.1, 0.1, 0.1)
+    _0xP.Transparency = 1
+    _0xP.Anchored = true
+    _0xP.CanCollide = false
+    _0xP.CFrame = _0xHrp.CFrame
+    _0xP.Parent = _0xChar
+
+    local _0xAp = Instance.new("AlignPosition")
+    _0xAp.Attachment0 = _0xP:FindFirstChildOfClass("Attachment") or Instance.new("Attachment", _0xP)
+    _0xAp.Attachment1 = _0xHrp:FindFirstChildOfClass("Attachment") or Instance.new("Attachment", _0xHrp)
+    _0xAp.RigidityEnabled = true
+    _0xAp.Responsiveness = 200
+    _0xAp.Parent = _0xP
+
+    local _0xDist = (_0xHrp.Position - _0xPos).Magnitude
+    local _0xDur = _0xDist / _0xSpd
+    
+    local _0xTInfo = TweenInfo.new(_0xDur, Enum.EasingStyle.Linear)
+    local _0xGoal = {CFrame = CFrame.new(_0xPos)}
+    local _0xTween = _0xTS:Create(_0xP, _0xTInfo, _0xGoal)
+
+    local _0xConn
+    local _0xCln = function()
+        if _0xConn then _0xConn:Disconnect() _0xConn = nil end
+        if _0xTween then _0xTween:Cancel() _0xTween = nil end
+        _0xP:Destroy()
+    end
+
+    _0xConn = _0xTween.Completed:Connect(function() _0xCln() end)
+    _0xTween:Play()
+    _0xTween.Completed:Wait()
+    
+    _0xHrp.CFrame = CFrame.new(_0xPos)
+    task.wait(0.15)
+    _0xCln()
+end
+
+function _0xRetHome()
+    local _0xPId = _0xLP:GetAttribute("PlotId")
+    if _0xPId then
+        local _0xGar = workspace.Gardens:FindFirstChild("Plot" .. tostring(_0xPId))
+        if _0xGar then 
+            local _0xSpn = _0xGar:FindFirstChild("SpawnPoint") 
+            if _0xSpn then _0xTw(_0xSpn.Position) return end 
+        end
+    end
+    _0xTw(Vector3.new(0, 10, 0))
+end
+
+Window:Notify({ Title = "CHU ROBLOX HUB", Content = "Script đã được mã hóa thành công!", Duration = 5 })
