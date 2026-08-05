@@ -1,0 +1,520 @@
+local a = getfenv()
+local b = string.char
+local c = table.concat
+local function d(e, f)
+  local g = {}
+  for h = 1, #e do
+    g[h] = b((e[h] - f))
+  end
+  return c(g)
+end
+local i = {}
+local function j(k)
+  if not i[k] then
+    i[k] = game:GetService(k)
+  end
+  return i[k]
+end
+local l = j("Players")
+local m = j("TweenService")
+local n = j("UserInputService")
+local o = j("TeleportService")
+local p = j("CoreGui")
+local q = j("RunService")
+local r = j("Lighting")
+local s = j("GuiService")
+local t = j("Stats")
+local u = j("VirtualInputManager")
+local v = l.LocalPlayer
+local w = v:WaitForChild("PlayerGui")
+local x = ((((gethui and gethui())) or p) or w)
+local y = "rbxassetid://89243556917765"
+local z = 9999
+local function aa(ab, ac)
+  task.spawn(function()
+    local ae, af = pcall(function()
+      local ad = game:HttpGet(ab)
+      if ac then
+        loadstring(ad)(ac)
+      else
+        loadstring(ad)()
+      end
+    end)
+    if not ae then
+      warn(("[Chú Roblox] Lỗi tải script: " .. tostring(af)))
+    end
+  end)
+end
+local ag = Instance.new("ScreenGui")
+ag.Name = "ChúRoblox_Intro"
+ag.IgnoreGuiInset = true
+ag.ResetOnSpawn = false
+ag.DisplayOrder = (z + 1)
+ag.Parent = x
+local ah = Instance.new("Frame")
+ah.Size = UDim2.fromScale(1, 1)
+ah.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+ah.BackgroundTransparency = 0.2
+ah.BorderSizePixel = 0
+ah.Parent = ag
+local ai = Instance.new("ImageLabel")
+ai.AnchorPoint = Vector2.new(0.5, 0.5)
+ai.Position = UDim2.fromScale(0.5, 0.45)
+ai.Size = UDim2.fromOffset(0, 0)
+ai.BackgroundTransparency = 1
+ai.Image = y
+ai.ImageTransparency = 1
+ai.Parent = ag
+local aj = Instance.new("TextLabel")
+aj.AnchorPoint = Vector2.new(0.5, 0)
+aj.Position = UDim2.fromScale(0.5, 0.7)
+aj.Size = UDim2.fromOffset(400, 40)
+aj.BackgroundTransparency = 1
+aj.Text = "Chú Roblox Hub"
+aj.TextColor3 = Color3.fromRGB(0, 255, 255)
+aj.Font = Enum.Font.GothamBold
+aj.TextScaled = true
+aj.TextTransparency = 1
+aj.Parent = ag
+task.spawn(function()
+  m:Create(ai, TweenInfo.new(1, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.fromOffset(150, 150), ImageTransparency = 0}):Play()
+  m:Create(aj, TweenInfo.new(1), {TextTransparency = 0}):Play()
+  task.wait(2)
+  local ak = TweenInfo.new(0.8)
+  m:Create(ai, ak, {ImageTransparency = 1}):Play()
+  m:Create(aj, ak, {TextTransparency = 1}):Play()
+  local al = m:Create(ah, ak, {BackgroundTransparency = 1})
+  al:Play()
+  al.Completed:Wait()
+  ag:Destroy()
+end)
+local am = Instance.new("ScreenGui")
+am.Name = "ChúRoblox_Toggle"
+am.ResetOnSpawn = false
+am.DisplayOrder = z
+am.Parent = x
+local an = Instance.new("ImageButton")
+an.Name = "ToggleButton"
+an.Size = UDim2.fromOffset(50, 50)
+an.Position = UDim2.new(0.02, 0, 0.2, 0)
+an.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+an.BorderSizePixel = 0
+an.Image = y
+an.ImageTransparency = 0
+an.AutoButtonColor = true
+an.Parent = am
+local ao = Instance.new("UICorner")
+ao.CornerRadius = UDim.new(1, 0)
+ao.Parent = an
+local ap = Instance.new("UIStroke")
+ap.Color = Color3.fromRGB(0, 255, 255)
+ap.Thickness = 2
+ap.Transparency = 0.3
+ap.Parent = an
+local aq, ar, as, at
+an.InputBegan:Connect(function(au)
+  if ((au.UserInputType == Enum.UserInputType.MouseButton1) or (au.UserInputType == Enum.UserInputType.Touch)) then
+    aq = true
+    at = false
+    ar = au.Position
+    as = an.Position
+    au.Changed:Connect(function()
+      if (au.UserInputState == Enum.UserInputState.End) then
+        aq = false
+      end
+    end)
+  end
+end)
+n.InputChanged:Connect(function(av)
+  if (aq and (((av.UserInputType == Enum.UserInputType.MouseMovement) or (av.UserInputType == Enum.UserInputType.Touch)))) then
+    local aw = (av.Position - ar)
+    if ((math.abs(aw.X) > 5) or (math.abs(aw.Y) > 5)) then
+      at = true
+    end
+    an.Position = UDim2.new(as.X.Scale, (as.X.Offset + aw.X), as.Y.Scale, (as.Y.Offset + aw.Y))
+  end
+end)
+local ax = Instance.new("ScreenGui")
+ax.Name = "ChúRoblox_Stats"
+ax.ResetOnSpawn = false
+ax.Parent = x
+local ay = Instance.new("Frame")
+ay.Size = UDim2.fromOffset(220, 30)
+ay.Position = UDim2.new(1, -230, 0, 10)
+ay.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+ay.BackgroundTransparency = 0.3
+ay.BorderSizePixel = 0
+ay.Parent = ax
+local az = Instance.new("UICorner")
+az.CornerRadius = UDim.new(0, 6)
+az.Parent = ay
+local ba = Instance.new("TextLabel")
+ba.Size = UDim2.fromScale(1, 1)
+ba.BackgroundTransparency = 1
+ba.TextColor3 = Color3.fromRGB(0, 255, 255)
+ba.Font = Enum.Font.GothamMedium
+ba.TextSize = 12
+ba.Text = "Chú Roblox | FPS: -- | Ping: --ms"
+ba.Parent = ay
+local bb = 0
+local bc = tick()
+q.RenderStepped:Connect(function()
+  bb = (bb + 1)
+  if ((tick() - bc) >= 1) then
+    local bd = bb
+    bb = 0
+    bc = tick()
+    local be = 0
+    pcall(function()
+      be = math.floor(t.Network.ServerStatsItem["Data Ping"]:GetValue())
+    end)
+    ba.Text = string.format("Chú Roblox | FPS: %d | Ping: %dms", bd, be)
+  end
+end)
+if not game:IsLoaded() then
+  game.Loaded:Wait()
+end
+local bf, bg = pcall(function()
+  return loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+end)
+if (not bf or not bg) then
+  warn("[Chú Roblox] Không thể tải thư viện Fluent UI!")
+  return
+end
+local bh = bg:CreateWindow({Title = "Chú Roblox", SubTitle = "tổng hợp script by chú roblox", TabWidth = 160, Size = UDim2.fromOffset(530, 370), Acrylic = false, Theme = "Dark", MinimizeKey = Enum.KeyCode.End})
+an.MouseButton1Click:Connect(function()
+  if not at then
+    local bi = (bh.MinimizeKey or Enum.KeyCode.End)
+    u:SendKeyEvent(true, bi, false, game)
+    u:SendKeyEvent(false, bi, false, game)
+  end
+end)
+local bj = {Info = bh:AddTab({Title = "Thông Tin", Icon = "info"}), Player = bh:AddTab({Title = "Nhân Vật", Icon = "user"}), ESP = bh:AddTab({Title = "Nhìn Xuyên Tường", Icon = "eye"}), Teleport = bh:AddTab({Title = "Dịch Chuyển", Icon = "map-pin"}), BloxFruits = bh:AddTab({Title = "Blox Fruits", Icon = "shield"}), GrowAGarden = bh:AddTab({Title = "Grow A Garden", Icon = "file-text"}), Forest = bh:AddTab({Title = "99 Nights Forest", Icon = "file-text"}), Troll = bh:AddTab({Title = "Troll Player", Icon = "smile"}), Misc = bh:AddTab({Title = "Tiện Ích", Icon = "settings"}), Settings = bh:AddTab({Title = "Cài Đặt", Icon = "sliders"})}
+bj.Info:AddButton({Title = "Sao chép Link Youtube", Description = "Kênh Youtube: Chú roblox", Callback = function()
+  setclipboard("https://www.youtube.com/@churobloxnew")
+  bg:Notify({Title = "Thành công", Content = "Đã dán link vào bộ nhớ tạm!", Duration = 3})
+end})
+bj.Info:AddButton({Title = "Shop Chú Roblox", Description = "Shop acc: Chú roblox", Callback = function()
+  setclipboard("https://churobloxshop.com/")
+  bg:Notify({Title = "Thành công", Content = "Đã dán link vào bộ nhớ tạm!", Duration = 3})
+end})
+local bk = 16
+local bl = 50
+local bm = false
+local bn = false
+local bo = false
+local bp = false
+q.RenderStepped:Connect(function()
+  local bq = v.Character
+  if bq then
+    local br = bq:FindFirstChildOfClass("Humanoid")
+    if br then
+      if bm then
+        br.WalkSpeed = bk
+      end
+      if bn then
+        br.UseJumpPower = true
+        br.JumpPower = bl
+      end
+    end
+    if bo then
+      for bs, bt in pairs(bq:GetDescendants()) do
+        if (bt:IsA("BasePart") and bt.CanCollide) then
+          bt.CanCollide = false
+        end
+      end
+    end
+  end
+end)
+n.JumpRequest:Connect(function()
+  if ((bp and v.Character) and v.Character:FindFirstChildOfClass("Humanoid")) then
+    v.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+  end
+end)
+bj.Player:AddSlider("WalkSpeed", {Title = "Tốc Độ Di Chuyển (Speed)", Default = 16, Min = 16, Max = 300, Rounding = 0, Callback = function(bu)
+  bk = bu
+  bm = ((bu > 16))
+end})
+bj.Player:AddSlider("JumpPower", {Title = "Độ Cao Nhảy (Jump)", Default = 50, Min = 50, Max = 400, Rounding = 0, Callback = function(bv)
+  bl = bv
+  bn = ((bv > 50))
+end})
+bj.Player:AddToggle("Noclip_Toggle", {Title = "Noclip (Đi Xuyên Tường)", Default = false, Callback = function(bw)
+  bo = bw
+end})
+bj.Player:AddKeybind("NoclipKey", {Title = "Phím Tắt Noclip", Mode = "Toggle", Default = "N", Callback = function(bx)
+  bo = bx
+  bg:Notify({Title = "Noclip", Content = ("Trạng thái Noclip: " .. tostring(bx)), Duration = 2})
+end})
+bj.Player:AddToggle("InfJump_Toggle", {Title = "Infinite Jump (Nhảy Vô Hạn)", Default = false, Callback = function(by)
+  bp = by
+end})
+local bz = false
+local ca = {}
+local function cb(cc)
+  if cc then
+    local cd = cc:FindFirstChild("ChúRoblox_ESP")
+    if cd then
+      cd:Destroy()
+    end
+  end
+end
+local function ce(cf)
+  if (cf == v) then
+    return
+  end
+  local function cg(ch)
+    if not ch then
+      return
+    end
+    cb(ch)
+    if bz then
+      local ci = Instance.new("Highlight")
+      ci.Name = "ChúRoblox_ESP"
+      ci.FillColor = Color3.fromRGB(0, 255, 255)
+      ci.OutlineColor = Color3.fromRGB(255, 255, 255)
+      ci.FillTransparency = 0.5
+      ci.OutlineTransparency = 0
+      ci.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+      ci.Adornee = ch
+      ci.Parent = ch
+    end
+  end
+  if cf.Character then
+    cg(cf.Character)
+  end
+  if not ca[cf] then
+    ca[cf] = cf.CharacterAdded:Connect(function(cj)
+      task.wait(0.5)
+      cg(cj)
+    end)
+  end
+end
+local function ck()
+  for cl, cm in pairs(l:GetPlayers()) do
+    if (cm ~= v) then
+      if bz then
+        ce(cm)
+      else
+        if cm.Character then
+          cb(cm.Character)
+        end
+      end
+    end
+  end
+end
+bj.ESP:AddToggle("ESP_Toggle", {Title = "Bật ESP Người Chơi (Highlight)", Default = false, Callback = function(cn)
+  bz = cn
+  ck()
+end})
+l.PlayerAdded:Connect(function(co)
+  ce(co)
+end)
+l.PlayerRemoving:Connect(function(cp)
+  if ca[cp] then
+    ca[cp]:Disconnect()
+    ca[cp] = nil
+  end
+end)
+local cq = nil
+local function cr()
+  local cs = {}
+  for ct, cu in pairs(l:GetPlayers()) do
+    if (cu ~= v) then
+      table.insert(cs, (cu.DisplayName .. (" (@" .. (cu.Name .. ")"))))
+    end
+  end
+  return cs
+end
+local cy = bj.Teleport:AddDropdown("PlayerTPDropdown", {Title = "Chọn Người Chơi", Values = cr(), Multi = false, Default = nil, Callback = function(cv)
+  for cw, cx in pairs(l:GetPlayers()) do
+    if (((cx.DisplayName .. (" (@" .. (cx.Name .. ")")))) == cv) then
+      cq = cx
+      break
+    end
+  end
+end})
+bj.Teleport:AddButton({Title = "Làm Mới Danh Sách", Callback = function()
+  cy:SetValues(cr())
+end})
+bj.Teleport:AddButton({Title = "Dịch Chuyển Đến Người Chơi", Callback = function()
+  if ((cq and cq.Character) and cq.Character:FindFirstChild("HumanoidRootPart")) then
+    if (v.Character and v.Character:FindFirstChild("HumanoidRootPart")) then
+      v.Character.HumanoidRootPart.CFrame = (cq.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 3))
+      bg:Notify({Title = "Dịch Chuyển", Content = ("Đã tới vị trí của " .. cq.DisplayName), Duration = 3})
+    end
+  else
+    bg:Notify({Title = "Lỗi", Content = "Không tìm thấy vị trí người chơi!", Duration = 3})
+  end
+end})
+local cz = {JoinTeam = "Pirates", Translator = true}
+bj.BloxFruits:AddButton({Title = "Neji Hub no key", Callback = function()
+  aa("https://raw.githubusercontent.com/Dev-NejiDepzai/Bloxfruits/refs/heads/main/Main.lua", cz)
+end})
+bj.BloxFruits:AddButton({Title = "w-azure Hub", Callback = function()
+  aa("https://api.luarmor.net/files/v3/loaders/85e904ae1ff30824c1aa007fc7324f8f.lua")
+end})
+bj.BloxFruits:AddButton({Title = "Banana-Cat-Hub", Callback = function()
+  aa("https://raw.githubusercontent.com/Von63rd/Banana-Cat-Hub/refs/heads/main/loader.luau")
+end})
+bj.BloxFruits:AddButton({Title = "Thundarz Hub", Callback = function()
+  aa("https://raw.githubusercontent.com/ThundarZ/Welcome/refs/heads/main/Main/BloxFruit/Chest/AllDevices.lua", cz)
+end})
+bj.BloxFruits:AddButton({Title = "Tay Hub no key", Callback = function()
+  aa("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/Tayhub.lua")
+end})
+bj.BloxFruits:AddButton({Title = "Speed Hub X", Callback = function()
+  aa("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua")
+end})
+bj.BloxFruits:AddButton({Title = "Than Hub", Callback = function()
+  aa("https://raw.githubusercontent.com/thantzy/thanhub/refs/heads/main/thanv1")
+end})
+bj.BloxFruits:AddButton({Title = "BlueX Hub", Callback = function()
+  aa("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua")
+end})
+bj.BloxFruits:AddButton({Title = "Tsoul Hub", Callback = function()
+  aa("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/Tsuoscripts")
+end})
+bj.BloxFruits:AddButton({Title = "Volcano Hub V3", Callback = function()
+  aa("https://raw.githubusercontent.com/indexeduu/BF-NewVer/refs/heads/main/V3New.lua")
+end})
+bj.BloxFruits:AddButton({Title = "Brave Hub no key", Callback = function()
+  aa("https://raw.githubusercontent.com/Jadelly261/FruitBlox/refs/heads/main/BraveLoader")
+end})
+bj.BloxFruits:AddButton({Title = "Fix Lag", Callback = function()
+  aa("https://raw.githubusercontent.com/TurboLite/Script/main/FixLag.lua")
+end})
+bj.GrowAGarden:AddButton({Title = "Zinx Hub (Best Spawner)", Callback = function()
+  aa("https://raw.githubusercontent.com/Hub-dev33/Main/refs/heads/main/ALLinOne.lua")
+end})
+bj.GrowAGarden:AddButton({Title = "Casual Hub", Callback = function()
+  aa("https://api.jnkie.com/api/v1/luascripts/public/056bf72c3cd7af38ca292db583aaba9ecd12205d214716e14654ee7781bfee23/download")
+end})
+bj.GrowAGarden:AddButton({Title = "Ajjans Hub", Callback = function()
+  aa("https://api.luarmor.net/files/v4/loaders/359e97f8618e9008afe5f496184ebb7c.lua")
+end})
+bj.GrowAGarden:AddButton({Title = "Star Scripts Spawner", Callback = function()
+  aa("https://raw.githubusercontent.com/scripteredwinter/scripts/refs/heads/main/gag2spawner")
+end})
+bj.GrowAGarden:AddButton({Title = "Polluted Hub", Callback = function()
+  aa("https://api.luarmor.net/files/v4/loaders/e8580ba6e94aeaa7aa2486f060167f85.lua")
+end})
+bj.GrowAGarden:AddButton({Title = "Blue X Hub ", Callback = function()
+  aa("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua")
+end})
+bj.Forest:AddButton({Title = "Voidware Hub", Callback = function()
+  aa("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/nightsintheforest.lua")
+end})
+bj.Forest:AddButton({Title = "Speed Hub X", Callback = function()
+  aa("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua")
+end})
+bj.Forest:AddButton({Title = "Pulse Hub", Callback = function()
+  aa("https://raw.githubusercontent.com/Chavels123/Loader/refs/heads/main/loader.lua")
+end})
+bj.Troll:AddButton({Title = "Fly (Script Bay)", Callback = function()
+  aa("https://raw.githubusercontent.com/hieuhieu989/Vihieu-fly/refs/heads/main/vihieu%20Fly.lua.txt")
+end})
+bj.Troll:AddButton({Title = "Jerk Off Script", Callback = function()
+  aa("https://pastefy.app/wa3v2Vgm/raw")
+end})
+local da = false
+local db = r.Brightness
+local dc = r.ClockTime
+local dd = r.GlobalShadows
+bj.Misc:AddToggle("Fullbright_Toggle", {Title = "Fullbright (Sáng Màn Hình)", Default = false, Callback = function(de)
+  da = de
+  if da then
+    r.Brightness = 2
+    r.ClockTime = 14
+    r.GlobalShadows = false
+  else
+    r.Brightness = db
+    r.ClockTime = dc
+    r.GlobalShadows = dd
+  end
+end})
+r.Changed:Connect(function()
+  if da then
+    r.Brightness = 2
+    r.ClockTime = 14
+    r.GlobalShadows = false
+  end
+end)
+local df
+bj.Misc:AddToggle("AntiAFK_Toggle", {Title = "Anti-AFK (Chống Văng Game)", Default = false, Callback = function(dg)
+  if dg then
+    local dh = j("VirtualUser")
+    df = v.Idled:Connect(function()
+      dh:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+      task.wait(1)
+      dh:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    end)
+    bg:Notify({Title = "Anti-AFK", Content = "Đã bật chống AFK!", Duration = 3})
+  else
+    if df then
+      df:Disconnect()
+      df = nil
+    end
+    bg:Notify({Title = "Anti-AFK", Content = "Đã tắt chống AFK!", Duration = 3})
+  end
+end})
+local di = false
+bj.Misc:AddToggle("AutoRejoin_Toggle", {Title = "Auto Rejoin Khi Mất Kết Nối", Default = false, Callback = function(dj)
+  di = dj
+end})
+s.ErrorMessageChanged:Connect(function()
+  if di then
+    task.wait(2)
+    o:Teleport(game.PlaceId, v)
+  end
+end)
+bj.Misc:AddButton({Title = "Super Fix Lag & Boost FPS", Callback = function()
+  for dk, dl in pairs(r:GetChildren()) do
+    if ((dl:IsA("PostEffect") or dl:IsA("Atmosphere")) or dl:IsA("Clouds")) then
+      dl:Destroy()
+    end
+  end
+  r.GlobalShadows = false
+  r.FogEnd = 9e9
+  for dm, dn in pairs(workspace:GetDescendants()) do
+    if dn:IsA("BasePart") then
+      dn.Material = Enum.Material.SmoothPlastic
+      dn.CastShadow = false
+      dn.Reflectance = 0
+    elseif (dn:IsA("Decal") or dn:IsA("Texture")) then
+      dn.Transparency = 1
+    elseif (((dn:IsA("ParticleEmitter") or dn:IsA("Trail")) or dn:IsA("Smoke")) or dn:IsA("Fire")) then
+      dn.Enabled = false
+    end
+  end
+  for dp, dq in pairs(r:GetChildren()) do
+    if dq:IsA("Sky") then
+      dq:Destroy()
+    end
+  end
+  local dr = Instance.new("Sky")
+  local ds = "rbxassetid://89243556917765"
+  dr.SkyboxBk = ds
+  dr.SkyboxDn = ds
+  dr.SkyboxFt = ds
+  dr.SkyboxLf = ds
+  dr.SkyboxRt = ds
+  dr.SkyboxUp = ds
+  dr.Parent = r
+  bg:Notify({Title = "Fix Lag", Content = "Đã tối ưu đồ họa, thay Bầu trời & Boost FPS!", Duration = 3})
+end})
+bj.Misc:AddButton({Title = "Vào Lại Server (Rejoin Game)", Callback = function()
+  o:Teleport(game.PlaceId, v)
+end})
+bj.Misc:AddButton({Title = "Đổi Server Khác (Server Hop)", Callback = function()
+  aa("https://raw.githubusercontent.com/LeoK39/ServerHop/main/Script.lua")
+end})
+pcall(function()
+  local dt = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/main/Addons/SaveManager.lua"))()
+  dt:SetLibrary(bg)
+  dt:SetFolder("ChuRobloxConfig")
+  dt:BuildConfigFolder()
+  dt:BuildFolderSection(bj.Settings)
+end)
+bh:SelectTab(bj.Info)
+bg:Notify({Title = "Chú Roblox", Content = "Đã Fix Full Lỗi thành công!", Duration = 3})
